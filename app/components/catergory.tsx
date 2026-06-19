@@ -1,11 +1,13 @@
 "use client";
 import Image from "next/image";
 import { useFetch } from "../hooks/useFetch";
+
 export interface CategoryT {
   id: number;
   name: string;
   image: string;
 }
+
 export default function Category() {
   const { data, pending, error } = useFetch<CategoryT>({
     url: "https://api.escuelajs.co/api/v1/categories",

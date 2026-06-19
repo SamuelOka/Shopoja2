@@ -10,6 +10,7 @@ import close from "../../public/close.svg";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useCart } from "../content/content";
 
 export default function NavBar() {
   return (
@@ -122,15 +123,17 @@ export function Shop() {
   );
 }
 export function CartIcon() {
-  //   const { cart } = useCart();
-  //   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const { cart } = useCart();
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
-    <div className="flex text-[20px] cursor-pointer relative items-baseline">
-      <div className="absolute bg-red-500 rounded-3xl text-[16px] px-[7px]  md:left-15 left-5 md:bottom-2 text-white">
-        0
+    <Link href={"/cart"}>
+      <div className="flex text-[20px] cursor-pointer relative items-baseline">
+        <div className="absolute bg-red-500 rounded-3xl text-[16px] px-[7px]  md:left-15 left-5 md:bottom-2 text-white">
+          {totalItems}
+        </div>
+        <Image src={cartImage} className="md:w-[20px] w-[40px]" alt="" />
+        <p className="hover:text-blue-800 md:block hidden">Cart</p>
       </div>
-      <Image src={cartImage} className="md:w-[20px] w-[40px]" alt="" />
-      <p className="hover:text-blue-800 md:block hidden">Cart</p>
-    </div>
+    </Link>
   );
 }

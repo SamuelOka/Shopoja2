@@ -10,13 +10,11 @@ export default function Category() {
   const { data, pending, error } = useFetch<CategoryT>({
     url: "https://api.escuelajs.co/api/v1/categories",
   });
-  {
-    data?.map((category) => {
-      console.log(category.image); // ← check what hostname is actually returned
-      return;
-    });
-  }
-  // console.log(categories);
+  if (pending)
+    return <p className="mt-80 h-[100vh] w-[100%] m-auto">loading .....</p>;
+  if (error)
+    return <p className=" m-auto w-fit p-4 ">Check your internet connection</p>;
+
   return (
     <>
       <h1 className="md:text-4xl text-2xl font-bold my-8 md:ml-12 ml-6 text-gray-800">
@@ -29,13 +27,11 @@ export default function Category() {
               key={category.id}
               className="items-center border md:w-30 w-20 border-solid border-gray-400 hover:border-blue-800 hover:shadow-lg ease-in py-4 px-4 md:rounded-2xl rounded-[10px] "
             >
-              {/* <Image
+              <img
                 className="w-15 mx-auto rounded-s-sm"
                 src={category.image}
                 alt={category.name}
-                width={20}
-                height={20}
-              /> */}
+              />
               <p className="text-center text-[14px]">{category.name}</p>
             </div>
           );

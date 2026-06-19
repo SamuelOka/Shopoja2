@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import facebook from "../assets/facebook.png";
-import instagram from "../assets/instagram.png";
-import linkedin from "../assets/linkedin.png";
-import add from "../assets/add.svg";
-import subtract from "../assets/subtract.svg";
+import facebook from "../../public/facebook.png";
+import instagram from "../../public/instagram.png";
+import linkedin from "../../public/linkedin.png";
+import add from "../../public/add.svg";
+import subtract from "../../public/subtract.svg";
 import Image from "next/image";
 export default function Footer() {
   return (

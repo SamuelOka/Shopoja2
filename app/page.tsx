@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FeedLeft, FeedRight } from "./annimation/framer";
-import bannerPic from "./assets/bannerpic.jpg";
-import explore from "./assets/bannerpic.jpg";
+import bannerPic from "../public/bannerpic.jpg";
+import explore from "../public/bannerpic.jpg";
 
 import { url } from "inspector";
 import Category from "./components/catergory";
@@ -20,8 +20,14 @@ export default function home() {
 function Banner() {
   return (
     <>
-      <div className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 md:p-20 px-5 py-15 mt-30  md:mt-20 md:grid md:grid-cols-2 ">
-        <div>
+      <div className="  mt-10 relative ">
+        <Image
+          className=" h-[100vh] w-[100vw] object-cover  md:block"
+          src={bannerPic}
+          alt=""
+          quality={100}
+        />
+        <div className="absolute top-[30%] left-[5%]">
           <FeedRight>
             <h1 className="md:text-6xl text-4xl text-white font-bold ">
               Summer Sale <br /> Up to 50% Off
@@ -34,15 +40,6 @@ function Banner() {
               Shop Now
             </div>
           </FeedRight>
-        </div>
-        <div>
-          <FeedLeft>
-            <Image
-              className="rounded-3xl hidden md:block"
-              src={bannerPic}
-              alt=""
-            />
-          </FeedLeft>
         </div>
       </div>
     </>

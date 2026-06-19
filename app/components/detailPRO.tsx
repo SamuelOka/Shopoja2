@@ -1,12 +1,13 @@
 "use client";
 
-import cartPic from "../assets/whiteCart.svg";
-import shipping from "../assets/shipping.svg";
-import secure from "../assets/secure.svg";
-import returns from "../assets/return.svg";
+import cartPic from "../../public/whiteCart.svg";
+import shipping from "../../public/shipping.svg";
+import secure from "../../public/secure.svg";
+import returns from "../../public/return.svg";
 import { useFetchS } from "../hooks/useFetch";
 
 import { useEffect, useState } from "react";
+import { useCart } from "../content/content";
 interface proDE {
   id: number;
   images: string[];
@@ -16,7 +17,7 @@ interface proDE {
 }
 
 export function Details({ proid }: { proid: number }) {
-  // const { dispatch } = useCart();
+  const { dispatch } = useCart();
   const [bigImg, setBigImg] = useState("");
   const [quantity, setQuantity] = useState(1);
   const {
@@ -32,20 +33,24 @@ export function Details({ proid }: { proid: number }) {
       setBigImg(product?.images[0]);
     }
   }, [product]);
-  // function handleAddtoCart() {
-  //   dispatch({
-  //     type: "ADD_TO_CART",
-  //     payload: {
-  //       id: product.id,
-  //       price: product.price,
-  //       image: bigImg,
-  //       name: product.title,
-  //       quantity,
-  //     },
-  //   });
-  // }
+
+  if (error)
+    return <p className=" m-auto w-fit p-4 ">Check your internet connection</p>;
+
   if (!product)
     return <p className="mt-80 h-[100vh] w-fit m-auto">loading ......</p>;
+  const handleAddtoCart = () => {
+    dispatch({
+      type: "ADD_CART",
+      payload: {
+        id: product?.id,
+        price: product?.price,
+        image: bigImg,
+        name: product?.title,
+        quantity,
+      },
+    });
+  };
   return (
     <div>
       <div className="hidden md:block">
@@ -53,6 +58,7 @@ export function Details({ proid }: { proid: number }) {
           product={product}
           bigImg={bigImg}
           setBigImg={setBigImg}
+          handleAddtoCart={handleAddtoCart}
           quantity={quantity}
           setQuantity={setQuantity}
         />
@@ -60,8 +66,7 @@ export function Details({ proid }: { proid: number }) {
       <div className="block md:hidden">
         <SmallDetails
           product={product}
-          bigImg={bigImg}
-          setBigImg={setBigImg}
+          handleAddtoCart={handleAddtoCart}
           quantity={quantity}
           setQuantity={setQuantity}
         />
@@ -74,12 +79,14 @@ export function BigDetails({
   product,
   bigImg,
   setBigImg,
+  handleAddtoCart,
   quantity,
   setQuantity,
 }: {
   product: proDE;
   bigImg: string;
   setBigImg: React.Dispatch<React.SetStateAction<string>>;
+  handleAddtoCart: () => void;
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
 }) {
@@ -151,7 +158,7 @@ export function BigDetails({
 
           <div className="flex gap-4 w-[100%] cursor-pointer">
             <div
-              onClick={() => console.log("something")}
+              onClick={handleAddtoCart}
               className=" flex gap-2 bg-blue-700 w-[50%] justify-center text-white text-[16px] rounded-[10px]  hover:bg-blue-900  font-semibold px-2 py-4 duration-200 ease-in mb-4"
             >
               <img src={cartPic} alt="" /> Add to Cart
@@ -201,14 +208,12 @@ export function BigDetails({
 }
 export function SmallDetails({
   product,
-  bigImg,
-  setBigImg,
+  handleAddtoCart,
   quantity,
   setQuantity,
 }: {
   product: proDE;
-  bigImg: string;
-  setBigImg: React.Dispatch<React.SetStateAction<string>>;
+  handleAddtoCart: () => void;
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
 }) {
@@ -270,7 +275,7 @@ export function SmallDetails({
 
           <div className="flex gap-4 w-[100%] cursor-pointer justify-center bg-white p-3 fixed top-203 ">
             <div
-              onClick={() => console.log("handleAddtoCart")}
+              onClick={handleAddtoCart}
               className=" flex items-center gap-2 bg-blue-700 w-[40%] justify-center text-white text-[16px] rounded-[10px]  hover:bg-blue-900  font-semibold px-1 py-2 duration-200 ease-in mb-4"
             >
               <img src={cartPic} alt="" className="w-6" /> Add to Cart

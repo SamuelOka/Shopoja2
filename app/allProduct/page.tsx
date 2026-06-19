@@ -96,7 +96,7 @@ function ProductShop({ cate }: { cate: string }) {
   );
 }
 
-function ProductTemplate({ proDetails }: { proDetails: ProT }) {
+export function ProductTemplate({ proDetails }: { proDetails: ProT }) {
   return (
     <Link href={`allProduct/${proDetails.id}`}>
       <div className="md:w-70 w-[90%] h-[10rem] relative border border-gray-300 md:h-110 min-h-75 md:mb-12 mb-6 md:rounded-2xl rounded-[10px] hover:shadow-2xl duration-200 ease-in">

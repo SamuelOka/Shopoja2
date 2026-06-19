@@ -1,40 +1,49 @@
 "use client";
 
-import search from "../assets/search.svg";
-import user from "../assets/user.svg";
-import cartImage from "../assets/cart.svg";
-import menu from "../assets/menu.svg";
-import close from "../assets/close.svg";
+import search from "../../public/search.svg";
+import user from "../../public/user.svg";
+import cartImage from "../../public/cart.svg";
+import menu from "../../public/menu.svg";
+import close from "../../public/close.svg";
 
 // import { useCart } from "../content/CartContent.jsx";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-function BigNav() {
-  return (
-    <div>
-      <div className="flex items-center justify-center bg-white   p-[16px] shadow-lg fixed top-0 right-0 left-0 z-10 w-[100%] ">
-        <Link href={"/"}>
-          <Logo />
-        </Link>
-
-        <Search />
-      </div>
-    </div>
-  );
-}
 
 export default function NavBar() {
   return (
     <>
       <div className="md:block hidden">
-        {" "}
         <BigNav />
       </div>
       <div className="md:hidden block">
         <SmallNav />
       </div>
     </>
+  );
+}
+
+function BigNav() {
+  return (
+    <div className="relative">
+      <div className="flex items-center justify-evenly bg-white   p-[16px] shadow-lg fixed top-0 right-0 left-0 z-10  ">
+        <Link href={"/"}>
+          <Logo />
+        </Link>
+        <Search />
+        <div className="flex items-baseline gap-3">
+          <Link href={"/"}>
+            <p className="text-[18px]  mt-2">Home</p>
+          </Link>
+
+          <Shop />
+
+          <Account />
+          <CartIcon />
+        </div>
+      </div>
+    </div>
   );
 }
 function SmallNav() {
@@ -60,11 +69,10 @@ function SmallNav() {
 
         <div className={open ? "flex flex-col gap-2 mx-7 my-5 " : "hidden "}>
           <hr className="text-gray-300" />
-          <p className="text-2xl mt-2">Home</p>
-          <Link href={"/allProduct"}>
-            <Shop />
+          <Shop />
+          <Link href={"/"}>
+            <p className="md:text-[18px] text-2xl   mt-2">Home</p>
           </Link>
-
           <Account />
         </div>
       </div>
@@ -73,9 +81,9 @@ function SmallNav() {
 }
 export function Account() {
   return (
-    <div className=" flex mr-[20px] cursor-pointer">
+    <div className=" flex mr-[20px] md:mr-0 cursor-pointer items-baseline">
       <img src={user} className="hidden md:block" alt="" />
-      <h3 className="md:text-[20px] text-[24px] hover:text-blue-800">
+      <h3 className="md:text-[18px] text-[24px] hover:text-blue-800">
         Account
       </h3>
     </div>
@@ -84,7 +92,7 @@ export function Account() {
 function Search() {
   return (
     <>
-      <div className="flex md:w-[55vw] w-[90%] border-2 border-solid border-blue-800 p-[15px] py-[8px] rounded-4xl mt-2 mx-auto md:mt-0 md:mx-[80px]">
+      <div className="flex md:w-[35vw] w-[90%] border-2 border-solid border-blue-800 p-[15px] py-[8px] rounded-4xl mt-2 mx-auto md:mx-0 md:mt-0 ">
         <img src={search} alt="" className="mr-[8px]" />
         <input
           type="text"
@@ -106,16 +114,18 @@ export function Logo() {
 }
 export function Shop() {
   return (
-    <h1 className="hover:text-blue-800 mr-5 md:text-[18px] text-[24px]">
-      Shop
-    </h1>
+    <Link href={"/allProduct"}>
+      <h1 className="hover:text-blue-800 mr-5 md:text-[18px] text-[24px]">
+        Shop
+      </h1>
+    </Link>
   );
 }
 export function CartIcon() {
   //   const { cart } = useCart();
   //   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
-    <div className="flex text-[20px] cursor-pointer relative">
+    <div className="flex text-[20px] cursor-pointer relative items-baseline">
       <div className="absolute bg-red-500 rounded-3xl text-[16px] px-[7px]  md:left-15 left-5 md:bottom-2 text-white">
         0
       </div>

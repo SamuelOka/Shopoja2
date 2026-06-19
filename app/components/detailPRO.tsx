@@ -8,6 +8,7 @@ import { useFetchS } from "../hooks/useFetch";
 
 import { useEffect, useState } from "react";
 import { useCart } from "../content/content";
+import Image from "next/image";
 interface proDE {
   id: number;
   images: string[];
@@ -273,12 +274,12 @@ export function SmallDetails({
             </div>
           </div>
 
-          <div className="flex gap-4 w-[100%] cursor-pointer justify-center bg-white p-3 fixed top-203 ">
+          <div className="flex gap-4 w-[100%] cursor-pointer justify-center bg-white p-3 fixed bottom-0 ">
             <div
               onClick={handleAddtoCart}
               className=" flex items-center gap-2 bg-blue-700 w-[40%] justify-center text-white text-[16px] rounded-[10px]  hover:bg-blue-900  font-semibold px-1 py-2 duration-200 ease-in mb-4"
             >
-              <img src={cartPic} alt="" className="w-6" /> Add to Cart
+              <Image src={cartPic} alt="" className="w-6" /> Add to Cart
             </div>
             <div className=" bg-orange-500 w-[40%] justify-center text-center text-white text-[16px] rounded-[10px]  hover:bg-amber-700  font-semibold px-2 py-4 duration-200 ease-in mb-4">
               Buy now
